@@ -1,0 +1,153 @@
+<script setup lang="ts">
+import {MyIcon} from "@/shared";
+
+const menuItems = [
+  {
+    label: 'Моя страница',
+    icon: 'home',
+    link: '/profile/me',
+  },
+  {
+    label: 'Чаты',
+    icon: 'chat',
+    link: '/chats',
+  },
+  {
+    label: 'Поиск',
+    icon: 'search',
+    link: '/search',
+  },
+]
+</script>
+
+<template>
+  <aside class="sidebar">
+    <a class="sidebar__brand" href="/">
+      <img class="sidebar__brand-logo" src="/assets/svg/logo-small.svg" alt="Logo">
+    </a>
+
+    <nav class="sidebar__nav">
+      <ul class="sidebar__nav-list">
+        <li class="sidebar__nav-item" v-for="menuItem of menuItems" :key="menuItem.link">
+          <RouterLink class="sidebar__nav-link" active-class="is-active" :to="menuItem.link">
+            <span class="sidebar__nav-icon">
+              <MyIcon :name="menuItem.icon"/>
+            </span>
+            <span class="sidebar__nav-label">{{ menuItem.label }}</span>
+          </RouterLink>
+        </li>
+      </ul>
+    </nav>
+
+    <RouterLink class="sidebar__footer" :to="'/settings'" active-class="is-active">
+      <div class="sidebar__user">
+        <img class="sidebar__user-avatar" src="/assets/images/avatar-placeholder.png" alt="User avatar">
+        <div class="sidebar__user-name">ryan.gosling</div>
+      </div>
+
+      <span class="sidebar__footer-icon">
+      <MyIcon :name="'settings'"/>
+    </span>
+    </RouterLink>
+  </aside>
+</template>
+
+<style scoped>
+.sidebar {
+  position: relative;
+  height: 100vh;
+  padding: 20px 12px;
+  background-color: var(--dark-color);
+}
+
+.sidebar__brand {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.sidebar__brand-logo {
+  display: block;
+}
+
+.sidebar__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar__nav-link {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--light-color);
+
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.sidebar__nav-link:hover,
+.sidebar__nav-link:focus-visible,
+.sidebar__nav-link.is-active {
+  background-color: var(--dark-hover-color);
+  color: var(--primary-color);
+}
+
+.sidebar__nav-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sidebar__nav-label {
+  display: inline-block;
+}
+
+.sidebar__footer {
+  position: absolute;
+  width: calc(100% - 24px);
+  bottom: 20px;
+
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--light-color);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.sidebar__footer:hover,
+.sidebar__footer:focus-visible,
+.sidebar__footer.is-active {
+  background-color: var(--dark-hover-color);
+  color: var(--primary-color);
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar__user-avatar {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.sidebar__user-name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.sidebar__footer-icon {
+  display: inline-flex;
+  align-items: center;
+}
+</style>

@@ -1,0 +1,1 @@
+export {default as MyIcon} from './ui/MyIcon.vue';
