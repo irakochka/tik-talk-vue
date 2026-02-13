@@ -22,16 +22,16 @@ const menuItems = [
 
 <template>
   <aside class="sidebar">
-    <a class="sidebar__brand" href="/">
+    <RouterLink class="sidebar__brand mb20" :to="'profile/me'">
       <img class="sidebar__brand-logo" src="/assets/svg/logo-small.svg" alt="Logo">
-    </a>
+    </RouterLink>
 
     <nav class="sidebar__nav">
       <ul class="sidebar__nav-list">
         <li class="sidebar__nav-item" v-for="menuItem of menuItems" :key="menuItem.link">
           <RouterLink class="sidebar__nav-link" active-class="is-active" :to="menuItem.link">
             <span class="sidebar__nav-icon">
-              <MyIcon :name="menuItem.icon"/>
+              <MyIcon :name="menuItem.icon" class="icon16"/>
             </span>
             <span class="sidebar__nav-label">{{ menuItem.label }}</span>
           </RouterLink>
@@ -46,7 +46,7 @@ const menuItems = [
       </div>
 
       <span class="sidebar__footer-icon">
-      <MyIcon :name="'settings'"/>
+      <MyIcon :name="'settings'" class="icon16"/>
     </span>
     </RouterLink>
   </aside>
@@ -62,7 +62,6 @@ const menuItems = [
 
 .sidebar__brand {
   display: block;
-  margin-bottom: 20px;
 }
 
 .sidebar__brand-logo {

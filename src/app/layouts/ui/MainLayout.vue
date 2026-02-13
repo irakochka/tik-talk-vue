@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SidebarWidget} from "@/widgets/sidebar";
+import {SidebarWidget} from "@/widgets";
 </script>
 
 <template>

@@ -9,8 +9,5 @@ defineProps<{ name: string }>();
 </template>
 
 <style scoped>
-.icon {
-  width: 16px;
-  height: 16px;
-}
+
 </style>
