@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {MyIcon} from "@/shared";
+import {AvatarCircle, MyIcon} from "@/shared";
+import {useProfileStore} from "@/entities";
+import {onMounted} from "vue";
 
 const menuItems = [
   {
@@ -17,7 +19,13 @@ const menuItems = [
     icon: 'search',
     link: '/search',
   },
-]
+];
+
+const profileStore = useProfileStore();
+
+onMounted(() => {
+  profileStore.fetchMe();
+});
 </script>
 
 <template>
@@ -39,10 +47,10 @@ const menuItems = [
       </ul>
     </nav>
 
-    <RouterLink class="sidebar__footer" :to="'/settings'" active-class="is-active">
+    <RouterLink v-if="profileStore.profile" class="sidebar__footer" :to="'/settings'" active-class="is-active">
       <div class="sidebar__user">
-        <img class="sidebar__user-avatar" src="/assets/images/avatar-placeholder.png" alt="User avatar">
-        <div class="sidebar__user-name">ryan.gosling</div>
+        <AvatarCircle :avatar-url="profileStore.profile.avatarUrl" class="size32"/>
+        <div class="sidebar__user-name">{{ profileStore.profile.username}}</div>
       </div>
 
       <span class="sidebar__footer-icon">
@@ -131,12 +139,6 @@ const menuItems = [
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.sidebar__user-avatar {
-  width: 32px;
-  height: 32px;
-  display: block;
 }
 
 .sidebar__user-name {

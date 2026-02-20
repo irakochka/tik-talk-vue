@@ -4,4 +4,9 @@ export const API_ROUTES = {
         refresh: '/auth/refresh',
         logout: '/auth/logout'
     },
+    profile: {
+        me: '/account/me',
+        subscribers: '/account/subscribers/',
+        uploadImage: '/account/upload_image'
+    }
 }

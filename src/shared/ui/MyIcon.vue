@@ -3,7 +3,7 @@ defineProps<{ name: string }>();
 </script>
 
 <template>
-  <svg class="icon" aria-hidden="true">
+  <svg class="common-icon" aria-hidden="true">
     <use :href="`/assets/svg/sprite.svg#${name}`"></use>
   </svg>
 </template>

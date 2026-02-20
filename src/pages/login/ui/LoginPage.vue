@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {MyIcon, MyInput, MyLabel} from "@/shared";
+import {AuthInput, MyButton, MyIcon, MyLabel} from "@/shared";
 import {ref} from "vue";
 import {router} from "@/app/router";
 import {useAuthStore} from "@/entities";
@@ -22,22 +22,21 @@ async function onSubmit(event: Event) {
     <form class="login-form" @submit.prevent="onSubmit">
       <h1 class="h1 mb60">Вход</h1>
 
-      <MyLabel>
-        <MyInput label="Telegram username" placeholder="Введите username" type="text" icon="telegram"
-                 v-model="form.username">
-          <MyIcon :name="'telegram'" class="common-icon field-icon icon20"/>
-        </MyInput>
+      <MyLabel label="Telegram username" class="login-form__label">
+        <AuthInput placeholder="Введите username" type="text" v-model="form.username">
+          <MyIcon name="telegram-link" class="common-icon field-icon icon20"/>
+        </AuthInput>
       </MyLabel>
 
-      <MyLabel>
-        <MyInput label="Пароль" placeholder="Введите пароль" type="text" icon="telegram" v-model="form.password">
+      <MyLabel label="Пароль" class="login-form__label">
+        <AuthInput placeholder="Введите пароль" type="password"  v-model="form.password">
           <button class="field__action" type="button" aria-label="Показать пароль">
-            <MyIcon :name="'password-eye'" class="common-icon icon20"/>
+            <MyIcon name="password-eye" class="common-icon icon20"/>
           </button>
-        </MyInput>
+        </AuthInput>
       </MyLabel>
 
-      <button class="btn btn--primary" type="submit">Войти</button>
+      <MyButton class="btn--primary" type="submit">Войти</MyButton>
     </form>
 
     <img class="login-illustration" src="/assets/svg/logo-big.svg" alt=""/>
@@ -75,6 +74,7 @@ async function onSubmit(event: Event) {
 }
 
 .field__action:focus-visible {
+  color: var(--light-color);
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
   border-radius: 6px;

@@ -13,6 +13,8 @@ export async function login(dto: { username: string; password: string }) {
 export async function refresh(refresh_token: string) {
     const {data} = await http.post<TokenResponse>(API_ROUTES.auth.refresh, { refresh_token });
     tokens.set(data.access_token, data.refresh_token);
+
+    return data;
 }
 
 export async function logout() {
