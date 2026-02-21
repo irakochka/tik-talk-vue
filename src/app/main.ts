@@ -1,15 +1,18 @@
 import {createApp} from 'vue';
 import './styles/style.css';
 import App from './App.vue';
-import {pinia} from "./store";
-import {router} from "./router";
-import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
+import {setupStore} from "@/app/providers/store";
+import {setupToast} from "@/app/providers/toast";
+import {setupRouter} from "@/app/providers/router";
+import {setupHttp} from "@/app/providers/http";
 
 const app = createApp(App);
 
-app.use(pinia);
-app.use(router);
-app.use(Toast, { timeout: 2500, closeOnClick: true });
+setupStore(app);
+setupToast(app);
+setupRouter(app);
+
+setupHttp(app);
 
 app.mount('#app');

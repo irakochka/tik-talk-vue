@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {PostFeed, ProfileHeader} from "@/features";
-import {useProfileStore} from "@/entities";
-import {AvatarCircle, MyButton, MyIcon} from "@/shared";
+import {ProfileHeader, useProfileStore} from "@/entities";
+import {AvatarCircle, BaseButton, SvgIcon} from "@/shared";
 import {computed, onMounted} from "vue";
+import {PostFeed} from "@/widgets";
 
 const profileStore = useProfileStore();
 
@@ -18,10 +18,10 @@ onMounted(() => {
     <div class="profile-page__header">
       <ProfileHeader :profile="profile"/>
       <div class="profile-page__actions">
-        <MyButton class="btn btn--primary" to="/settings">
+        <BaseButton class="btn btn--primary" to="/settings">
           <span>Редактировать</span>
-          <MyIcon name="settings" class="icon16"/>
-        </MyButton>
+          <SvgIcon name="settings" class="icon16"/>
+        </BaseButton>
       </div>
     </div>
     <div class="profile-page__body">
@@ -39,7 +39,7 @@ onMounted(() => {
               </RouterLink>
             </li>
             <RouterLink to="/search" class="subscribers__btn">
-              <MyIcon name="plus" class="icon16"/>
+              <SvgIcon name="plus" class="icon16"/>
             </RouterLink>
           </ul>
         </div>

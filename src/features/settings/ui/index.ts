@@ -1,1 +1,0 @@
-export {default as AvatarUpload} from './avatar-upload/AvatarUpload.vue'

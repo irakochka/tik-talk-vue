@@ -1,4 +1,3 @@
-export * from './api/profile.api';
-export * from './model/profile.interfaces';
-
-export {useProfileStore} from './model/profile.store';
+export * from './model/types';
+export { default as ProfileHeader } from './ui/ProfileHeader.vue';
+export { useProfileStore } from './model/profile.store';

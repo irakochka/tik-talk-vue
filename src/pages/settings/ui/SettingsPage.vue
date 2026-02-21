@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import {AvatarUpload, ProfileHeader} from "@/features";
-import {type ProfileForm, type UpdateProfileDto, useAuthStore, useProfileStore} from "@/entities";
-import {MyButton, MyIcon, TextInput, MyLabel} from "@/shared";
-import {router} from "@/app/router";
+import {type ProfileForm, ProfileHeader, type UpdateProfileDto, useProfileStore} from "@/entities";
+import {BaseButton, SvgIcon, BaseInput, BaseLabel, AutoTextarea, TagInput} from "@/shared";
 import {computed, reactive, watch} from "vue";
-import StackInput from "@/shared/ui/StackInput.vue";
-import MyTextarea from "@/shared/ui/MyTextarea.vue";
+import {router} from "@/app/providers/router";
 import {useToast} from "vue-toastification";
+import {AvatarUpload, useAuthStore} from "@/features";
 
 const toast = useToast();
 const profileStore = useProfileStore();
@@ -92,48 +90,48 @@ async function logout() {
     <div class="profile-form settings__profile-form">
       <div class="profile-form__controls">
         <div class="profile-form__two-columns">
-          <MyLabel label="Имя" class="form-label">
-            <TextInput placeholder="Укажите имя" type="text" v-model="form.firstName"/>
-          </MyLabel>
+          <BaseLabel label="Имя" class="form-label">
+            <BaseInput placeholder="Укажите имя" type="text" v-model="form.firstName"/>
+          </BaseLabel>
 
-          <MyLabel label="Фамилия" class="form-label">
-            <TextInput placeholder="Укажите фамилию" type="text" v-model="form.lastName"/>
-          </MyLabel>
+          <BaseLabel label="Фамилия" class="form-label">
+            <BaseInput placeholder="Укажите фамилию" type="text" v-model="form.lastName"/>
+          </BaseLabel>
         </div>
 
-        <MyLabel label="Telegram username" class="form-label">
-          <TextInput type="text" v-model="form.username" disabled/>
-        </MyLabel>
+        <BaseLabel label="Telegram username" class="form-label">
+          <BaseInput type="text" v-model="form.username" disabled/>
+        </BaseLabel>
 
-        <MyLabel label="О себе" class="form-label">
-          <MyTextarea placeholder="Напишите что-нибудь о себе" type="text" v-model="form.description"/>
-        </MyLabel>
+        <BaseLabel label="О себе" class="form-label">
+          <AutoTextarea placeholder="Напишите что-нибудь о себе" type="text" v-model="form.description"/>
+        </BaseLabel>
 
-        <MyLabel label="Аватарка">
+        <BaseLabel label="Аватарка">
           <AvatarUpload v-model:avatarFile="form.avatarFile" v-model:avatarUrl="form.avatarUrl"/>
-        </MyLabel>
+        </BaseLabel>
 
-        <MyLabel label="Навыки" forId="stack-input" class="form-label">
-          <StackInput id="stack-input" type="text" v-model="form.stack"/>
-        </MyLabel>
+        <BaseLabel label="Навыки" forId="stack-input" class="form-label">
+          <TagInput id="stack-input" type="text" v-model="form.stack"/>
+        </BaseLabel>
       </div>
 
       <div class="profile-form__actions">
         <div class="profile-form__actions-left">
-          <MyButton class="btn--secondary btn--icon negative-color">
-            <MyIcon name="trash" class="icon16"/>
-          </MyButton>
-          <MyButton class="btn--secondary btn--icon" @click="logout">
-            <MyIcon name="logout" class="icon16"/>
-          </MyButton>
+          <BaseButton class="btn--secondary btn--icon negative-color">
+            <SvgIcon name="trash" class="icon16"/>
+          </BaseButton>
+          <BaseButton class="btn--secondary btn--icon" @click="logout">
+            <SvgIcon name="logout" class="icon16"/>
+          </BaseButton>
         </div>
         <div class="profile-form__actions-right">
-          <MyButton class="btn--secondary" @click="router.push('/profile/me')">
+          <BaseButton class="btn--secondary" @click="router.push('/profile/me')">
             Отмена
-          </MyButton>
-          <MyButton class="btn--primary" @click="updateProfile()">
+          </BaseButton>
+          <BaseButton class="btn--primary" @click="updateProfile()">
             Сохранить
-          </MyButton>
+          </BaseButton>
         </div>
       </div>
     </div>

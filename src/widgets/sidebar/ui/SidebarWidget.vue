@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {AvatarCircle, MyIcon} from "@/shared";
+import {AvatarCircle, SvgIcon} from "@/shared";
 import {useProfileStore} from "@/entities";
 import {onMounted} from "vue";
 
@@ -24,7 +24,7 @@ const menuItems = [
 const profileStore = useProfileStore();
 
 onMounted(() => {
-  profileStore.fetchMe();
+  profileStore.loadMe();
 });
 </script>
 
@@ -39,7 +39,7 @@ onMounted(() => {
         <li class="sidebar__nav-item" v-for="menuItem of menuItems" :key="menuItem.link">
           <RouterLink class="sidebar__nav-link" active-class="is-active" :to="menuItem.link">
             <span class="sidebar__nav-icon">
-              <MyIcon :name="menuItem.icon" class="icon16"/>
+              <SvgIcon :name="menuItem.icon" class="icon16"/>
             </span>
             <span class="sidebar__nav-label">{{ menuItem.label }}</span>
           </RouterLink>
@@ -54,7 +54,7 @@ onMounted(() => {
       </div>
 
       <span class="sidebar__footer-icon">
-      <MyIcon :name="'settings'" class="icon16"/>
+      <SvgIcon :name="'settings'" class="icon16"/>
     </span>
     </RouterLink>
   </aside>
