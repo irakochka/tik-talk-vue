@@ -3,7 +3,7 @@ import {SidebarWidget} from "@/widgets";
 </script>
 
 <template>
-  <div class="layout">
+  <div class="layout container">
     <SidebarWidget/>
     <section class="main">
       <RouterView/>

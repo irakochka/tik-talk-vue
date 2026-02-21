@@ -21,7 +21,7 @@ const hasIcon = computed(() => !!slots.default);
   width: 100%;
   padding: 12px 14px;
   border-radius: 6px;
-  border: 1px solid transparent;
+  border: 1px solid var(--light-color);
   background-color: var(--dark-color);
   color: var(--light-color);
   outline: none;

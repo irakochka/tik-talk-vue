@@ -6,8 +6,9 @@ import {router} from "@/app/router";
 import {computed, reactive, watch} from "vue";
 import StackInput from "@/shared/ui/StackInput.vue";
 import MyTextarea from "@/shared/ui/MyTextarea.vue";
+import {useToast} from "vue-toastification";
 
-
+const toast = useToast();
 const profileStore = useProfileStore();
 const authStore = useAuthStore();
 const form = reactive<ProfileForm>({
@@ -38,7 +39,7 @@ watch(
     { immediate: true }
 );
 
-function updateProfile() {
+async function updateProfile() {
   const dto: UpdateProfileDto = {
     firstName: form.firstName.trim(),
     lastName: form.lastName.trim(),
@@ -47,17 +48,29 @@ function updateProfile() {
     stack: form.stack,
   };
 
-  if (form.avatarFile) {
-    profileStore.updateAvatar(form.avatarFile);
-  }
+  try {
+    if (form.avatarFile) {
+      await profileStore.updateAvatar(form.avatarFile);
+    }
 
-  profileStore.updateMe(dto);
-  router.push('/profile/me');
+    await profileStore.updateMe(dto);
+
+    toast.success('Данные профиля обновлены!');
+    await router.push('/profile/me');
+  } catch (err: unknown) {
+    toast.error('Ошибка сервера. Попробуйте позже.');
+  }
 }
 
-function logout() {
-  authStore.logoutUser();
-  router.push('/login');
+async function logout() {
+  try {
+    await authStore.logoutUser();
+
+    toast.success('Вы вышли из системы!');
+    await router.push('/login');
+  } catch (err: unknown) {
+    toast.error('Ошибка сервера. Попробуйте позже.');
+  }
 }
 </script>
 

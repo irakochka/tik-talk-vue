@@ -68,6 +68,16 @@ onMounted(() => {
   background-color: var(--dark-color);
 }
 
+.sidebar:before {
+  content: ' ';
+  background-color: var(--dark-color);
+  width: 1200px;
+  position: absolute;
+  height: 100%;
+  left: -1200px;
+  top: 0;
+}
+
 .sidebar__brand {
   display: block;
 }

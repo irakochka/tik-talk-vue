@@ -45,6 +45,13 @@ textarea {
     font-family: 'JetBrains Mono', monospace;
 }
 
+/* container */
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 /* margins */
 .mb4 {
     margin-bottom: 4px;
@@ -220,10 +227,24 @@ h5 {
     color: var(--light-success-color);
 }
 
-/* TODO пофиксить */
+/* login-form */
 .login-form__label .field__label {
-    font-weight: 700!important;
-    font-size: 14px!important;
-    line-height: 20px!important;
-    color: var(--light-color)!important;
+    color: var(--light-color) !important;
+}
+
+/* toast */
+.Vue-Toastification__toast--success,
+.Vue-Toastification__toast--error {
+    background-color: var(--dark-color) !important;
+    color: var(--light-color) !important;
+}
+
+.Vue-Toastification__toast {
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+.Vue-Toastification__toast-body {
+    font-size: 13px!important;
 }
