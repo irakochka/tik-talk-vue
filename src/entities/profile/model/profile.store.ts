@@ -10,6 +10,12 @@ export const useProfileStore = defineStore('profile', () => {
     async function loadMe() {
         const { data } = await profileService.getMe();
         profile.value = data;
+        return data;
+    }
+
+    async function loadAccount(id: number) {
+        const { data } = await profileService.getAccount(id);
+        return data;
     }
 
     async function updateMe(dto: UpdateProfileDto) {
@@ -22,10 +28,10 @@ export const useProfileStore = defineStore('profile', () => {
         profile.value = data;
     }
 
-    async function fetchSubscribers() {
+    async function loadSubscribers() {
         const { data } = await profileService.getSubscribers();
         subscribers.value = data.items;
     }
 
-    return { profile, subscribers, loadMe, updateMe, updateAvatar, fetchSubscribers };
+    return { profile, subscribers, loadMe, updateMe, updateAvatar, loadSubscribers, loadAccount };
 });

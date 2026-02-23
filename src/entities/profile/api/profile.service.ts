@@ -8,6 +8,9 @@ export const profileService = {
     async getSubscribers() {
         return await http.get<Pageable<Profile>>(API_ENDPOINTS.profile.subscribers);
     },
+    async getAccount(id: number) {
+        return await http.get<Profile>(`${API_ENDPOINTS.profile.account}/${id}`);
+    },
     async update(dto: UpdateProfileDto) {
         return await http.patch<Profile>(API_ENDPOINTS.profile.me, dto);
     },

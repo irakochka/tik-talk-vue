@@ -1,15 +1,32 @@
 <script setup lang="ts">
-import {ProfileHeader, useProfileStore} from "@/entities";
+import {type Profile, ProfileHeader, useProfileStore} from "@/entities";
 import {AvatarCircle, BaseButton, SvgIcon} from "@/shared";
-import {computed, onMounted} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {PostFeed} from "@/widgets";
+import {useRoute} from "vue-router";
 
+const route = useRoute();
 const profileStore = useProfileStore();
 
-const profile = computed(() => profileStore.profile);
+const profile = ref<Profile | null>(null);
+
+const profileId = computed<number | null>(() => {
+  const raw = route.params.id;
+  if (typeof raw !== "string") return null;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+});
+
+const isMyProfile = computed(() => profileId.value === null);
+
+watch(profileId, async (id) => {
+  profile.value = id === null
+      ? await profileStore.loadMe()
+      : await profileStore.loadAccount(id);
+}, { immediate: true });
 
 onMounted(() => {
-  profileStore.fetchSubscribers();
+  profileStore.loadSubscribers();
 })
 </script>
 
@@ -18,9 +35,13 @@ onMounted(() => {
     <div class="profile-page__header">
       <ProfileHeader :profile="profile"/>
       <div class="profile-page__actions">
-        <BaseButton class="btn btn--primary" to="/settings">
+        <BaseButton v-if="isMyProfile" class="btn btn--primary" to="/settings">
           <span>Редактировать</span>
           <SvgIcon name="settings" class="icon16"/>
+        </BaseButton>
+        <BaseButton v-else class="btn btn--primary" to="/settings">
+          <span>Написать</span>
+          <SvgIcon name="send" class="icon16"/>
         </BaseButton>
       </div>
     </div>
@@ -43,7 +64,7 @@ onMounted(() => {
             </RouterLink>
           </ul>
         </div>
-        <div v-if="profile.stack.length > 0" class="skills sidebar__skills mb32">
+        <div v-if="profile.stack && profile.stack.length > 0" class="skills sidebar__skills mb32">
           <h5 class="h5 mb16">Навыки</h5>
           <ul class="skills__list">
             <li v-for="skill in profile.stack" :key="skill" class="stack-item">{{ skill }}</li>

@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
     profile: {
         me: '/account/me',
         subscribers: '/account/subscribers/',
-        uploadImage: '/account/upload_image'
+        uploadImage: '/account/upload_image',
+        account: 'account'
     }
 } as const;
