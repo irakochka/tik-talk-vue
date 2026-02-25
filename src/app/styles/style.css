@@ -57,6 +57,14 @@ textarea {
     margin-bottom: 4px;
 }
 
+.mb8 {
+    margin-bottom: 8px;
+}
+
+.mb12 {
+    margin-bottom: 12px;
+}
+
 .mb16 {
     margin-bottom: 16px;
 }
@@ -195,6 +203,11 @@ h5 {
 .icon10 {
     width: 10px;
     height: 10px;
+}
+
+.icon14 {
+    width: 14px;
+    height: 14px;
 }
 
 .icon16 {

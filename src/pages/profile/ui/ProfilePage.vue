@@ -27,7 +27,7 @@ watch(profileId, async (id) => {
 
 onMounted(() => {
   profileStore.loadSubscribers();
-})
+});
 </script>
 
 <template>
@@ -46,7 +46,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="profile-page__body">
-      <PostFeed :profile="profile" :posts="[]"/>
+      <PostFeed :profile="profile" :isMyProfile="isMyProfile" :profileId="profileId"/>
       <div class="sidebar profile-page__sidebar">
         <div v-if="profileStore.subscribers" class="subscribers sidebar__subscribers mb32">
           <div class="subscribers__title mb16">

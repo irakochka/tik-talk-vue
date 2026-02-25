@@ -1,4 +1,4 @@
-import type {Profile} from "../../profile/model/types";
+import type {Profile} from "@/entities";
 
 export type Post = {
     id: number
@@ -21,4 +21,11 @@ export type PostComment = {
     commentId: number
     createdAt: string
     updatedAt: string
+}
+
+export type CreatePostDto = {
+    title: string,
+    content: string,
+    authorId: number,
+    communityId?: number
 }

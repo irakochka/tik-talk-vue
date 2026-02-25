@@ -9,5 +9,10 @@ export const API_ENDPOINTS = {
         subscribers: '/account/subscribers/',
         uploadImage: '/account/upload_image',
         account: 'account'
+    },
+    post: {
+        list: '/post/',
+        create: '/post/',
+        byId: (id: number | string) => `/post/${id}`,
     }
 } as const;
