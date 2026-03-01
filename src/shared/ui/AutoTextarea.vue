@@ -25,7 +25,7 @@ onMounted(autoResize);
   padding: 8px 0;
   height: 44px;
   color: var(--light-color);
-  background-color: var(--dark-color);
+  background-color: transparent;
   resize: none;
   border: none;
   border-bottom: 1px solid var(--light-color-transparrent);

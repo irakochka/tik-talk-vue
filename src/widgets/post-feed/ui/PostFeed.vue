@@ -64,6 +64,16 @@ async function onCreatePost(content: string) {
   }
 }
 
+async function onUpdatePost(postId: number, content: string) {
+  try {
+    await postStore.updatePost(postId, {title: 'Обновленный пост', content});
+
+    toast.success('Пост обновлен!');
+  } catch (err: unknown) {
+    toast.error('Ошибка сервера. Попробуйте позже.');
+  }
+}
+
 async function onDeletePost(postId: number) {
   try {
     await postStore.deletePost(postId);
@@ -83,7 +93,7 @@ async function onDeletePost(postId: number) {
     <div class="post-feed__posts" ref="feedWrapperRef">
       <div v-if="posts.length" class="post-feed__posts--wrapper">
         <PostCard v-if="posts.length" v-for="post in posts" :key="post.id" :post="post" :profile="profile"
-                  :isMyProfile="isMyProfile" @delete="onDeletePost"/>
+                  :isMyProfile="isMyProfile" @update="onUpdatePost" @delete="onDeletePost"/>
       </div>
       <p v-else class="post-feed__text medium-text" :class="isMyProfile ? '' : 'post-feed__text--dashed-border'">
         {{ isMyProfile ? ' Постов нет. Напишите свой первый пост!' : 'Пользователь еще ничего не написал!' }}

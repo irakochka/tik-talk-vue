@@ -5,6 +5,7 @@ export {default as BaseInput} from './BaseInput.vue';
 export {default as BaseLabel} from './BaseLabel.vue';
 export {default as BaseModal} from './BaseModal.vue';
 export {default as ConfirmModal} from './ConfirmModal.vue';
+export {default as EditableInput} from './EditableInput.vue';
 export {default as ModalHost} from './ModalHost.vue';
 export {default as PopoverHost} from './PopoverHost.vue';
 export {default as SendInput} from './SendInput.vue';

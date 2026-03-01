@@ -1,7 +1,16 @@
 <script setup lang="ts">
 
 import type {Post} from "../model/types.ts";
-import {AvatarCircle, SendInput, SvgIcon, formatPostTime, usePopover, useModal, ConfirmModal} from "@/shared";
+import {
+  AvatarCircle,
+  SendInput,
+  SvgIcon,
+  formatPostTime,
+  usePopover,
+  useModal,
+  ConfirmModal,
+  EditableInput
+} from "@/shared";
 import {type Profile} from "@/entities";
 import {computed, ref} from "vue";
 import {PostActionsPopover} from "@/features";
@@ -15,9 +24,11 @@ const menuBtnRef = ref<HTMLButtonElement | null>(null);
 const isActive = computed(() => {
   return popover.state.value.anchorEl === menuBtnRef.value;
 });
+const isEditable = ref(false);
 
 const emit = defineEmits<{
   (e: "delete", postId: number): void;
+  (e: "update", postId: number, content: string): void;
 }>();
 
 function togglePostMenu() {
@@ -30,7 +41,11 @@ function togglePostMenu() {
   }
 
   popover.show(PostActionsPopover, anchor, {
-    onEdit: () => popover.hide(),
+    onEdit: () => {
+      popover.hide();
+
+      isEditable.value = true;
+    },
     onDelete: () => {
       popover.hide();
 
@@ -50,6 +65,12 @@ function togglePostMenu() {
   });
 }
 
+function onUpdate(content: string) {
+  if (!content) return;
+
+  emit("update", props.post.id, content);
+  isEditable.value = false;
+}
 function onCreateComment(content: string) {
 }
 </script>
@@ -73,7 +94,11 @@ function onCreateComment(content: string) {
         </button>
       </header>
 
-      <div class="post__content medium-text mb8">
+      <div v-if="isEditable">
+        <EditableInput :profile="profile" :editableText="post.content" @cancel="isEditable = false" @update="onUpdate"/>
+      </div>
+
+      <div v-else class="post__content medium-text mb8">
         {{ post.content }}
       </div>
 
@@ -155,6 +180,10 @@ function onCreateComment(content: string) {
 
 .post__menu--active {
   border: 1px solid var(--light-color);
+}
+
+.post__content {
+  max-width: calc(100% - 52px);
 }
 
 .post__footer {

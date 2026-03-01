@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {postService} from "@/entities/post/api/post.service.ts";
 import {ref} from "vue";
-import type {CreatePostDto, Post} from "@/entities";
+import type {CreatePostDto, Post, UpdatePostDto} from "@/entities";
 
 export const usePostStore = defineStore('post', () => {
     const posts = ref<Post[]>([]);
@@ -20,10 +20,19 @@ export const usePostStore = defineStore('post', () => {
         return data;
     }
 
+    async function updatePost(id: number, dto: UpdatePostDto) {
+        const { data } = await postService.update(id, dto);
+        posts.value = (posts.value ?? []).map(p =>
+            p.id === id ? { ...p, ...data } : p
+        );
+
+        return data;
+    }
+
     async function deletePost(id: number) {
         await postService.delete(id);
         posts.value = posts.value.filter(p => p.id !== id);
     }
 
-    return { posts, loadPosts, createPost, deletePost };
+    return { posts, loadPosts, createPost, updatePost, deletePost };
 });

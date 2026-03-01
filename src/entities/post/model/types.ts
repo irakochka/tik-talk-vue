@@ -29,3 +29,8 @@ export type CreatePostDto = {
     authorId: number,
     communityId?: number
 }
+
+export type UpdatePostDto = {
+    title: string,
+    content: string,
+}
