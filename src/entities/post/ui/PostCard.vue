@@ -28,8 +28,9 @@ const isActive = computed(() => {
 const isEditable = ref(false);
 
 const emit = defineEmits<{
-  (e: "delete", postId: number): void;
-  (e: "update", postId: number, content: string): void;
+  (e: 'delete', postId: number): void;
+  (e: 'update', postId: number, content: string): void;
+  (e: 'createComment', postId: number, text: string): void;
 }>();
 
 function togglePostMenu() {
@@ -51,12 +52,12 @@ function togglePostMenu() {
       popover.hide();
 
       modal.show(ConfirmModal, {
-        title: "Удаление поста",
-        message: "Вы уверены, что хотите удалить пост? Это действие нельзя отменить.",
-        confirmText: "Удалить",
-        cancelText: "Отмена",
+        title: 'Удаление поста',
+        message: 'Вы уверены, что хотите удалить пост? Это действие нельзя отменить.',
+        confirmText: 'Удалить',
+        cancelText: 'Отмена',
         onConfirm: async () => {
-          emit("delete", props.post.id);
+          emit('delete', props.post.id);
           modal.hide();
         },
         onClose: () => modal.hide(),
@@ -69,10 +70,11 @@ function togglePostMenu() {
 function onUpdate(content: string) {
   if (!content) return;
 
-  emit("update", props.post.id, content);
+  emit('update', props.post.id, content);
   isEditable.value = false;
 }
 function onCreateComment(content: string) {
+  emit('createComment', props.post.id, content);
 }
 </script>
 

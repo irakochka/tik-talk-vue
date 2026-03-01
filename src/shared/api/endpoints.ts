@@ -13,6 +13,9 @@ export const API_ENDPOINTS = {
     post: {
         list: '/post/',
         create: '/post/',
-        byId: (id: number | string) => `/post/${id}`,
-    }
+        byId: (id: number) => `/post/${id}`,
+    },
+    comment: {
+        create: '/comment/',
+    },
 } as const;

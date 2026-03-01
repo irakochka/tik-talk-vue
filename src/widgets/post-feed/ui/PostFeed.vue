@@ -4,11 +4,13 @@ import {SendInput} from "@/shared";
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import {useToast} from "vue-toastification";
 import {storeToRefs} from "pinia";
+import {useCommentStore} from "@/entities/comment";
 
 const props = defineProps<{ profile: Profile, isMyProfile: boolean, profileId: number }>();
 
 const toast = useToast();
 const postStore = usePostStore();
+const commentStore = useCommentStore();
 const { posts } = storeToRefs(postStore);
 
 const feedWrapperRef = ref<HTMLDivElement | null>(null);
@@ -83,6 +85,17 @@ async function onDeletePost(postId: number) {
     toast.error('Ошибка сервера. Попробуйте позже.');
   }
 }
+
+async function onCreateComment(postId: number, text: string) {
+  try {
+    const newComment = await commentStore.createComment({postId, text, authorId: props.profile.id});
+    postStore.addCommentToPost(postId, newComment);
+
+    toast.success('Комментарий создан!');
+  } catch (err: unknown) {
+    toast.error('Ошибка сервера. Попробуйте позже.');
+  }
+}
 </script>
 
 <template>
@@ -93,7 +106,7 @@ async function onDeletePost(postId: number) {
     <div class="post-feed__posts" ref="feedWrapperRef">
       <div v-if="posts.length" class="post-feed__posts--wrapper">
         <PostCard v-if="posts.length" v-for="post in posts" :key="post.id" :post="post" :profile="profile"
-                  :isMyProfile="isMyProfile" @update="onUpdatePost" @delete="onDeletePost"/>
+                  :isMyProfile="isMyProfile" @update="onUpdatePost" @delete="onDeletePost" @createComment="onCreateComment"/>
       </div>
       <p v-else class="post-feed__text medium-text" :class="isMyProfile ? '' : 'post-feed__text--dashed-border'">
         {{ isMyProfile ? ' Постов нет. Напишите свой первый пост!' : 'Пользователь еще ничего не написал!' }}

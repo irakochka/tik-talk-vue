@@ -1,4 +1,5 @@
 import type {Profile} from "@/entities";
+import type {PostComment} from "@/entities/comment";
 
 export type Post = {
     id: number
@@ -11,16 +12,6 @@ export type Post = {
     updatedAt: string
     likes: number
     comments: PostComment[]
-}
-
-export type PostComment = {
-    id: number
-    text: string
-    author: Omit<Profile, 'isActive' | 'stack' | 'city' | 'description'>
-    postId: number
-    commentId: number
-    createdAt: string
-    updatedAt: string
 }
 
 export type CreatePostDto = {
