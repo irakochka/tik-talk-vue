@@ -14,6 +14,7 @@ import {
 import {type Profile} from "@/entities";
 import {computed, ref} from "vue";
 import {PostActionsPopover} from "@/features";
+import {CommentCard} from "@/entities/comment";
 
 const props = defineProps<{ post: Post, profile: Profile, isMyProfile: boolean }>();
 
@@ -89,7 +90,7 @@ function onCreateComment(content: string) {
         <time class="post__time" :datetime="post.createdAt">
           {{ formatPostTime(post.createdAt, { relativeDaysLimit: 7 }) }}
         </time>
-        <button ref="menuBtnRef" class="post__menu" :class="{ 'post__menu--active': isActive }" type="button" aria-label="Меню поста" @click="togglePostMenu">
+        <button v-if="isMyProfile" ref="menuBtnRef" class="post__menu" :class="{ 'post__menu--active': isActive }" type="button" aria-label="Меню поста" @click="togglePostMenu">
           <SvgIcon name="more" class="icon16"/>
         </button>
       </header>
@@ -114,8 +115,9 @@ function onCreateComment(content: string) {
         </button>
       </footer>
 
-      <!-- комментарии -->
-      <section class="post__comments"></section>
+      <section class="post__comments">
+        <CommentCard v-for="comment of post.comments" :comment="comment" :profile="profile" :is-my-profile="isMyProfile"/>
+      </section>
 
       <div v-if="isMyProfile" class="post__reply">
         <SendInput :profile="profile" :is-comment-input="true" @create="onCreateComment"/>
@@ -189,6 +191,13 @@ function onCreateComment(content: string) {
 .post__footer {
   display: flex;
   gap: 20px;
+}
+
+.post__comments {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .post__meta-btn {
