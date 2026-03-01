@@ -35,7 +35,6 @@ defineEmits<{
   padding: 8px 4px;
   width: 100%;
   display: flex;
-  align-items: center;
   gap: 6px;
   font-size: 12px;
   color: var(--light-color);
