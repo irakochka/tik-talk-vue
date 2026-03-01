@@ -39,7 +39,7 @@ export const usePostStore = defineStore('post', () => {
         const post = posts.value?.find(p => p.id === postId);
         if (!post) return;
 
-        post.comments = [comment, ...(post.comments ?? [])];
+        post.comments = [...(post.comments ?? []), comment];
     }
 
     return { posts, loadPosts, createPost, updatePost, deletePost, addCommentToPost };
