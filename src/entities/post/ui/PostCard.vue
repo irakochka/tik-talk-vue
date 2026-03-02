@@ -73,6 +73,7 @@ function onUpdate(content: string) {
   emit('update', props.post.id, content);
   isEditable.value = false;
 }
+
 function onCreateComment(content: string) {
   emit('createComment', props.post.id, content);
 }
@@ -90,9 +91,10 @@ function onCreateComment(content: string) {
         </div>
 
         <time class="post__time" :datetime="post.createdAt">
-          {{ formatPostTime(post.createdAt, { relativeDaysLimit: 7 }) }}
+          {{ formatPostTime(post.createdAt, {relativeDaysLimit: 7}) }}
         </time>
-        <button v-if="isMyProfile" ref="menuBtnRef" class="post__menu" :class="{ 'post__menu--active': isActive }" type="button" aria-label="Меню поста" @click="togglePostMenu">
+        <button v-if="isMyProfile" ref="menuBtnRef" class="post__menu" :class="{ 'post__menu--active': isActive }"
+                type="button" aria-label="Меню поста" @click="togglePostMenu">
           <SvgIcon name="more" class="icon16"/>
         </button>
       </header>
@@ -118,7 +120,8 @@ function onCreateComment(content: string) {
       </footer>
 
       <section class="post__comments">
-        <CommentCard v-for="comment of post.comments" :comment="comment" :profile="profile" :is-my-profile="isMyProfile"/>
+        <CommentCard v-for="comment of post.comments" :comment="comment" :profile="profile"
+                     :is-my-profile="isMyProfile"/>
       </section>
 
       <div v-if="isMyProfile" class="post__reply">
@@ -196,10 +199,22 @@ function onCreateComment(content: string) {
 }
 
 .post__comments {
-  padding: 8px 0;
+  margin: 8px 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.post__comments::-webkit-scrollbar {
+  width: 4px;
+  background-color: #161616;
+}
+
+.post__comments::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
 }
 
 .post__meta-btn {

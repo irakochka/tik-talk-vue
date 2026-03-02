@@ -128,6 +128,14 @@ async function onCreateComment(postId: number, text: string) {
 
 .post-feed__posts {
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.post-feed__posts::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .post-feed__posts--wrapper {
