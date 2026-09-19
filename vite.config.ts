@@ -4,6 +4,7 @@ import {fileURLToPath} from "node:url";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/tik-talk-vue/',
   plugins: [vue()],
   resolve: {
     alias: {

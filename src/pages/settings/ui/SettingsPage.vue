@@ -76,7 +76,7 @@ async function logout() {
   <div v-if="profile" class="settings">
     <div class="user-info settings__user-info">
       <ProfileHeader :profile="profile" class="user-info__header mb32"/>
-      <div v-if="profile.stack.length > 0" class="skills settings__skills mb32">
+      <div v-if="profile.stack && profile.stack.length > 0" class="skills settings__skills mb32">
         <h5 class="h5 mb16">Навыки</h5>
         <ul class="skills__list">
           <li v-for="stack in profile.stack" :key="stack" class="stack-item">{{ stack }}</li>
@@ -190,7 +190,6 @@ async function logout() {
   gap: 20px;
 }
 </style>
-
 
 
 

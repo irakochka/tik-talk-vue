@@ -1,12 +1,10 @@
 <script setup lang="ts">
 
 import {AvatarCircle, SvgIcon} from "@/shared";
-import {ref} from "vue";
 import { vDnd } from "@/shared/lib/directives/dnd.ts";
 
 const previewUrl = defineModel<string>('avatarUrl', { default: '' });
 const avatarFile = defineModel<File | null>('avatarFile', { default: null });
-const fileInputRef = ref<HTMLInputElement | null>(null);
 
 function processFile(file: File | null | undefined) {
   if (!file || !file.type.startsWith('image/')) return;

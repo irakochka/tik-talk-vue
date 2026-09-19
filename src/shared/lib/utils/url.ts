@@ -1,4 +1,6 @@
-const BASE_URL = '/yt-course';
+const BASE_URL = import.meta.env.DEV
+    ? '/yt-course'
+    : 'https://icherniakov.ru/yt-course';
 
 function isExternalOrSpecial(url: string) {
     return (

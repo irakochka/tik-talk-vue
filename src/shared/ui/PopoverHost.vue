@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch, type CSSProperties } from "vue";
 import { usePopover } from "@/shared/lib/popover/usePopover";
 
 const popover = usePopover();
@@ -22,7 +22,7 @@ function calcPos() {
 
 const pos = ref({ top: 0, left: 0 });
 
-const style = computed(() => ({
+const style = computed<CSSProperties>(() => ({
   position: "fixed",
   top: `${pos.value.top}px`,
   left: `${pos.value.left}px`,
