@@ -71,12 +71,24 @@ async function onSubmit(event: Event) {
     </AuthLabel>
 
     <BaseButton class="btn--primary" type="submit">Войти</BaseButton>
+
+    <div class="auth-form__link">
+      <a href="https://t.me/icherniakov_info_bot" target="_blank">Бот, выдающий аккаунты</a>
+    </div>
   </form>
 </template>
 
 <style scoped>
 .auth-form {
   width: 440px;
+}
+
+.auth-form__link {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--light-color-transparrent);
+  text-align: center;
+  text-decoration: underline;
 }
 
 .field__action {
