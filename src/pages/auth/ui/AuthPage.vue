@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import {AuthForm} from "@/features";
+import {toPublicUrl} from "@/shared";
+
+const logoSrc = toPublicUrl('assets/svg/logo-big.svg');
 </script>
 
 <template>
   <div class="auth">
     <AuthForm/>
 
-    <img class="auth-illustration" src="/assets/svg/logo-big.svg" alt=""/>
+    <img class="auth-illustration" :src="logoSrc" alt=""/>
   </div>
 </template>
 

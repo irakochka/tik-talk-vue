@@ -3,8 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import {fileURLToPath} from "node:url";
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/tik-talk-vue/',
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/tik-talk-vue/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -20,4 +20,4 @@ export default defineConfig({
       },
     },
   }
-})
+}))

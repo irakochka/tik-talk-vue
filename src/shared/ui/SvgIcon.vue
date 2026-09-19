@@ -1,10 +1,14 @@
 <script setup lang="ts">
-defineProps<{ name: string }>();
+import {computed} from "vue";
+import {toPublicUrl} from "@/shared";
+
+const props = defineProps<{ name: string }>();
+const href = computed(() => `${toPublicUrl('assets/svg/sprite.svg')}#${props.name}`);
 </script>
 
 <template>
   <svg class="common-icon" aria-hidden="true">
-    <use :href="`/assets/svg/sprite.svg#${name}`"></use>
+    <use :href="href"></use>
   </svg>
 </template>
 

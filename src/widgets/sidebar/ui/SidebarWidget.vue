@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {AvatarCircle, SvgIcon} from "@/shared";
+import {toPublicUrl} from "@/shared";
 import {useProfileStore} from "@/entities";
 import {onMounted} from "vue";
 
@@ -22,6 +23,7 @@ const menuItems = [
 ];
 
 const profileStore = useProfileStore();
+const logoSrc = toPublicUrl('assets/svg/logo-small.svg');
 
 onMounted(() => {
   profileStore.loadMe();
@@ -31,7 +33,7 @@ onMounted(() => {
 <template>
   <aside class="sidebar">
     <RouterLink class="sidebar__brand mb20" :to="'profile/me'">
-      <img class="sidebar__brand-logo" src="/assets/svg/logo-small.svg" alt="Logo">
+      <img class="sidebar__brand-logo" :src="logoSrc" alt="Logo">
     </RouterLink>
 
     <nav class="sidebar__nav">

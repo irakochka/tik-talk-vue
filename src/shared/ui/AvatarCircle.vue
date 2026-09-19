@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {toAssetUrl} from "@/shared";
+import {toAssetUrl, toPublicUrl} from "@/shared";
 
 const props = defineProps<{ avatarUrl?: string | null }>();
 
 const avatarSrc = computed(() => toAssetUrl(props.avatarUrl));
+const placeholderSrc = computed(() => toPublicUrl('assets/images/avatar-placeholder.png'));
 </script>
 
 <template>
   <div class="avatar-circle">
     <img v-if="avatarSrc" :src="avatarSrc" alt="User avatar">
-    <img v-else src="/assets/images/avatar-placeholder.png" alt="User avatar">
+    <img v-else :src="placeholderSrc" alt="User avatar">
   </div>
 </template>
 

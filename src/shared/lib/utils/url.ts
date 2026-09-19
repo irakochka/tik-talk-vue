@@ -2,6 +2,13 @@ const BASE_URL = import.meta.env.DEV
     ? '/yt-course'
     : 'https://icherniakov.ru/yt-course';
 
+export function toPublicUrl(path: string): string {
+    const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+    const clean = path.replace(/^\/+/, '');
+
+    return `${base}/${clean}`;
+}
+
 function isExternalOrSpecial(url: string) {
     return (
         url.startsWith('data:') ||

@@ -21,7 +21,7 @@ body {
     height: 100dvh;
     font-family: 'JetBrains Mono', monospace;
     background-color: var(--dark-color);
-    background-image: url(/assets/images/background.png);
+    background-image: var(--app-background-image);
     color: var(--light-color);
 }
 

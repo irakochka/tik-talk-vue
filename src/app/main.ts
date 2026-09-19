@@ -7,6 +7,11 @@ import {setupToast} from "@/app/providers/toast";
 import {setupRouter} from "@/app/providers/router";
 import {setupHttp} from "@/app/providers/http";
 
+document.documentElement.style.setProperty(
+    '--app-background-image',
+    `url('${import.meta.env.BASE_URL}assets/images/background.png')`,
+);
+
 const app = createApp(App);
 
 setupStore(app);
